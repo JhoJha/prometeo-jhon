@@ -1,0 +1,16 @@
+﻿streamlit==1.48.1       # (versión sugerida, más reciente)
+sqlalchemy==2.0.43      # versiones recientes OK
+psycopg2-binary>=2.9.10
+alembic==1.16.4
+pandas>=2.2.3
+numpy>=2.1.1
+scipy>=1.14.1
+plotly==6.3.0           # más reciente, sin conflictos
+matplotlib==3.9.2       # compatibilidad con numpy 2
+python-dateutil==2.8.2
+pytz==2023.3
+python-dotenv==1.1.1
+pydantic==2.9.2         # trae wheels, evita Rust
+typing-extensions==4.14.1
+cachetools==6.1.0
+openpyxl==3.1.5

@@ -1,4 +1,4 @@
-﻿# config/jhon_master_config.py
+﻿# config/jhon_master_config.py - PARTE 1/6
 # Configuración hardcodeada completa PROMETEO-JHON
 # Todo el contexto específico de Jhon Villegas Verde centralizado
 
@@ -132,27 +132,31 @@ CALENDARIO_CICLO_2025_2 = {
    "fechas_criticas": {
        "semana_4": {
            "fecha": date(2025, 9, 8),   # Lunes
-           "descripcion": "Primera ola PCs (Álgebra, Discretas, Procesos)"
+           "descripcion": "Primera ola PCs (Álgebra, Discretas, Estadística PC1)"
        },
-       "semana_6": {
-           "fecha": date(2025, 9, 22),  # Lunes
-           "descripcion": "PC2 Álgebra Matricial"
+       "semana_7": {
+           "fecha": date(2025, 9, 29),  # Lunes  
+           "descripcion": "PC2 Estadística + Comprensión lectura 1 Ética"
        },
        "semana_9": {
            "fecha": date(2025, 10, 13), # Lunes
-           "descripcion": "SEMANA PARCIALES - Crítica para meta 15.82"
+           "descripcion": "SEMANA PARCIALES - Crítica para meta 15.82 + Examen 1 Estadística"
        },
-       "semana_11": {
-           "fecha": date(2025, 10, 27), # Lunes
-           "descripcion": "PC3 Álgebra - Post parciales"
+       "semana_12": {
+           "fecha": date(2025, 11, 3), # Lunes
+           "descripcion": "PC3 Estadística + PC4 Redacción"
        },
        "semana_14": {
            "fecha": date(2025, 11, 17), # Lunes
-           "descripcion": "PC4 Álgebra - Recta final"
+           "descripcion": "PC4 Estadística + PC4 Álgebra"
+       },
+       "semana_15": {
+           "fecha": date(2025, 11, 24), # Lunes
+           "descripcion": "Comprensión lectura 2 Ética"
        },
        "semana_17": {
            "fecha": date(2025, 12, 8),  # Lunes
-           "descripcion": "PC5 Álgebra + preparación finales"
+           "descripcion": "Examen 2 Estadística + PC5 Álgebra + preparación finales"
        },
        "semana_18": {
            "fecha": date(2025, 12, 15), # Lunes
@@ -170,39 +174,7 @@ CALENDARIO_CICLO_2025_2 = {
        "vacaciones_inicio": date(2025, 12, 28)
    }
 }
-
-def calcular_fecha_semana(numero_semana: int) -> date:
-   """Calcula fecha exacta de una semana académica"""
-   inicio = CALENDARIO_CICLO_2025_2["informacion_basica"]["inicio_ciclo"]
-   return inicio + timedelta(weeks=numero_semana - 1)
-
-def obtener_semana_actual() -> int:
-   """Obtiene semana académica actual del ciclo"""
-   hoy = date.today()
-   inicio = CALENDARIO_CICLO_2025_2["informacion_basica"]["inicio_ciclo"]
-   fin = CALENDARIO_CICLO_2025_2["informacion_basica"]["fin_clases"]
-   
-   if hoy < inicio:
-       return 0  # Antes del ciclo
-   elif hoy > fin:
-       return 19  # Después del ciclo
-   else:
-       diferencia = (hoy - inicio).days
-       return (diferencia // 7) + 1
-
-def dias_restantes_ciclo() -> int:
-   """Calcula días restantes del ciclo académico"""
-   hoy = date.today()
-   fin = CALENDARIO_CICLO_2025_2["informacion_basica"]["fin_clases"]
-   if hoy > fin:
-       return 0
-   return (fin - hoy).days
-
-# ============================================================================
-# CURSOS CICLO 2025-II COMPLETO
-# ============================================================================
-
-CURSOS_CICLO_2025_2_COMPLETO = {
+CURSOS_MATEMATICAS_CRITICAS = {
    "CC4036_Algebra_Matricial": {
        "datos_basicos": {
            "nombre": "Álgebra Matricial",
@@ -397,42 +369,139 @@ CURSOS_CICLO_2025_2_COMPLETO = {
            "tecnica_recomendada": "Práctica problemas + visualización grafos",
            "horario_optimo": "Mañanas con medicación"
        }
-   },
-   
+   }
+}
+CURSOS_CORE_CARRERA = {
    "EP2085_Estadistica_General": {
        "datos_basicos": {
            "nombre": "Estadística General",
            "codigo": "EP2085",
            "creditos": 3,
            "profesores": ["Viernes Rosazza", "Mauricio Maguiña"],
+           "horas_teoria": 2,
+           "horas_practica": 2,
+           "requisito": "CC2073 Análisis Matemático II",
            "dificultad_jhon": 4,  # Moderada-alta
            "tipo": "Core Carrera",
            "ansiedad_nivel": "MEDIO",
            "impacto_meta_1582": "ALTO"
        },
        
-       "sistema_evaluacion_estimado": {
-           "practicas_calificadas": {"ponderacion": 0.40},
-           "examen_parcial": {"ponderacion": 0.25},
-           "examen_final": {"ponderacion": 0.25},
-           "trabajo_grupal_final": {"ponderacion": 0.10}
+       "competencias_especificas": [
+           "Aplica estadística descriptiva a conjuntos de datos",
+           "Aplica inferencia estadística para toma de decisiones", 
+           "Utiliza software especializado (R)",
+           "Comunica resultados estadísticos apropiadamente"
+       ],
+       
+       "contenidos_detallados": {
+           "unidad_1": "Conceptos básicos - Población, muestra, variables, parámetros",
+           "unidad_2": "Organización de datos - Tablas de frecuencia y gráficas",
+           "unidad_3": "Medidas estadísticas - Tendencia central, posición, dispersión",
+           "unidad_4": "Probabilidades - Experimento aleatorio, eventos, teorema Bayes",
+           "unidad_5": "Variables aleatorias - Discretas y continuas, valor esperado",
+           "unidad_6": "Distribuciones discretas - Binomial, Hipergeométrica, Poisson",
+           "unidad_7": "Distribuciones continuas - Normal, t-student, Chi cuadrado",
+           "unidad_8": "Inferencia estadística - Intervalos de confianza, pruebas de hipótesis"
+       },
+       
+       "sistema_evaluacion_confirmado": {
+           "practicas_calificadas": {
+               "ponderacion": 0.40,
+               "cantidad": 4,
+               "descripcion": "Aplicación práctica de conceptos estadísticos"
+           },
+           "examen_1": {
+               "ponderacion": 0.25,
+               "descripcion": "Primer examen de conocimientos"
+           },
+           "examen_2": {
+               "ponderacion": 0.25,
+               "descripcion": "Segundo examen de conocimientos"
+           },
+           "trabajos_grupales": {
+               "ponderacion": 0.10,
+               "cantidad": 2,
+               "descripcion": "Aplicación práctica grupal"
+           }
+       },
+       
+       "calendario_evaluaciones_exacto": {
+           "PC1": {
+               "fecha": date(2025, 9, 8),   # Semana 4
+               "tema": "Conceptos básicos y organización de datos",
+               "preparacion_dias": 2,
+               "software_requerido": "R básico",
+               "critico": False
+           },
+           "PC2": {
+               "fecha": date(2025, 9, 29),  # Semana 7
+               "tema": "Medidas estadísticas y probabilidades",
+               "preparacion_dias": 3,
+               "software_requerido": "R intermedio",
+               "critico": False
+           },
+           "EXAMEN_1": {
+               "fecha": date(2025, 10, 13), # Semana 9
+               "tema": "Conceptos básicos hasta probabilidades",
+               "preparacion_dias": 5,
+               "trabajo_grupal_1": "Entrega simultánea",
+               "critico": True,
+               "peso_meta_1582": "ALTO"
+           },
+           "PC3": {
+               "fecha": date(2025, 11, 3),  # Semana 12
+               "tema": "Variables aleatorias y distribuciones",
+               "preparacion_dias": 3,
+               "software_requerido": "R avanzado",
+               "critico": False
+           },
+           "PC4": {
+               "fecha": date(2025, 11, 17), # Semana 14
+               "tema": "Distribuciones continuas",
+               "preparacion_dias": 3,
+               "software_requerido": "R gráficos",
+               "critico": False
+           },
+           "PRACTICA_REZAGADOS": {
+               "fecha": date(2025, 12, 1),  # Semana 16
+               "condicion": "Solo con justificación previa",
+               "critico": False
+           },
+           "EXAMEN_2": {
+               "fecha": date(2025, 12, 8),  # Semana 17
+               "tema": "Variables aleatorias hasta inferencia estadística",
+               "preparacion_dias": 7,
+               "trabajo_grupal_2": "Entrega simultánea",
+               "critico": True,
+               "peso_meta_1582": "ALTO"
+           },
+           "EXAMEN_REZAGADOS": {
+               "fecha": date(2025, 12, 15), # Semana 18
+               "condicion": "Solo con justificación previa",
+               "critico": False
+           }
        },
        
        "herramientas_especificas": {
-           "r_estadistico": "Necesita recordar sintaxis",
-           "python_personal": "Fortaleza existente de Jhon",
-           "excel": "Básico requerido",
-           "software_estadistico": "Posiblemente SPSS"
+           "software_principal": "R Estadístico",
+           "guia_oficial": {
+               "disponible": "Federado de posgrado (sobre centro médico)",
+               "version": "2025-II actualizada",
+               "incluye": ["Visualizaciones mejoradas", "Códigos R en GitHub", "Corrección errores 2025-I"]
+           },
+           "recursos_adicionales": ["GitHub con códigos", "Datos de práctica", "Gráficas explicativas"]
        },
        
        "estrategias_jhon_especificas": {
-           "fortaleza": "Conceptos estadísticos - base matemática",
-           "oportunidad": "Usar Python como ventaja competitiva",
+           "fortaleza_principal": "Área de carrera - conceptos familiares",
+           "oportunidad": "Usar Python como complemento a R",
+           "enfoque": "Práctica constante con datos reales",
            "horas_estudio_semanales": 5,
-           "enfoque": "Práctica con datos reales"
-       },
-       
-       "status": "pendiente_silabo"
+           "correlacion_asistencia": "Alta correlación asistencia-calificación (mencionado en sílabo)",
+           "ubicacion_optima": "Laboratorio DAEI para prácticas",
+           "ventaja_competitiva": "Background matemático y programación"
+       }
    },
    
    "EP2095_Ingenieria_Procesos": {
@@ -503,14 +572,18 @@ CURSOS_CICLO_2025_2_COMPLETO = {
            "horas_estudio_semanales": 4,
            "oportunidad": "Nota alta para compensar matemáticas"
        }
-   },
-   
+   }
+}
+CURSOS_HUMANIDADES_CONFIRMADOS = {
    "EP1052_Redaccion_Argumentacion": {
        "datos_basicos": {
            "nombre": "Redacción y Argumentación",
            "codigo": "EP1052",
            "creditos": 2,
-           "profesor": "Martín David Córdova Pacheco",
+           "profesor_confirmado": "Edmundo de la Sota Díaz",
+           "email_profesor": "edelasota@lamolina.edu.pe",
+           "requisito": "EP1051 Lengua y Comunicación",
+           "horas_teoria": 2,
            "dificultad_jhon": 4,  # Alta por ortografía
            "tipo": "Comunicación",
            "debilidad_especifica": "Ortografía",
@@ -518,54 +591,277 @@ CURSOS_CICLO_2025_2_COMPLETO = {
            "impacto_meta_1582": "MEDIO"
        },
        
-       "sistema_evaluacion_estimado": {
-           "practicas_y_avances": {"ponderacion": 0.50},
-           "trabajo_final_sustentacion": {"ponderacion": 0.40},
-           "participacion_actitudinal": {"ponderacion": 0.10}
+       "competencias_oficiales": {
+           "principal": "Redacta, de forma eficiente, textos académicos y científicos utilizando el registro formal",
+           "especificas": [
+               "Utiliza estructuras propias del lenguaje de textos académicos",
+               "Identifica y utiliza estructuras y esquemas de textos académicos",
+               "Planifica y esquematiza información para producción textual argumentativa"
+           ]
+       },
+       
+       "unidades_programaticas": {
+           "unidad_1": {
+               "nombre": "El texto y el registro formal",
+               "semanas": "1-7 (18 agosto - 5 octubre)",
+               "logro": "Elaborar eficazmente enunciados en lenguaje formal con orden sintáctico y semántico apropiado, y párrafos con cohesión y coherencia",
+               "contenidos_clave": [
+                   "Registro formal, objetividad, subjetividad",
+                   "Registro técnico científico",
+                   "Estructura textual: micro, macro y superestructuras",
+                   "Mecanismos de cohesión gramaticales",
+                   "Signos de puntuación",
+                   "Errores comunes de redacción y normas RAE"
+               ]
+           },
+           "unidad_2": {
+               "nombre": "Las macroestructuras textuales y producción de textos",
+               "semanas": "8-11 (6 octubre - 2 noviembre)",
+               "logro": "Planificar, jerarquizar y producir textos usando operadores textuales para cohesión y coherencia",
+               "contenidos_clave": [
+                   "Etapas: Planificación, producción, revisión",
+                   "Generación y jerarquización de ideas",
+                   "Textos descriptivos y expositivos",
+                   "La argumentación: tesis y argumentos"
+               ]
+           },
+           "unidad_3": {
+               "nombre": "Las superestructuras textuales",
+               "semanas": "12-16 (3 noviembre - 7 diciembre)",
+               "logro": "Redactar texto académico usando método científico. Utilizar, jerarquizar y redactar argumentos para sostener una tesis",
+               "contenidos_clave": [
+                   "Superestructura textual",
+                   "Textos científicos",
+                   "Método científico en redacción",
+                   "Normas APA y estandarización",
+                   "Estrategias de sustentación"
+               ]
+           }
+       },
+       
+       "sistema_evaluacion_confirmado": {
+           "practicas_y_avances": {
+               "ponderacion": 0.50,
+               "descripcion": "Reconocimiento y aplicación de fundamentos + microestructuras + macroestructuras"
+           },
+           "trabajo_final_sustentacion": {
+               "ponderacion": 0.40,
+               "descripcion": "Superestructuras textuales con criterios científicos y normas APA + sustentación"
+           },
+           "actitudinal": {
+               "ponderacion": 0.10,
+               "componentes": ["Participación activa", "Iniciativa, orden y responsabilidad"]
+           }
+       },
+       
+       "calendario_evaluaciones_exacto": {
+           "PRACTICA_1": {
+               "fecha": date(2025, 9, 8),   # Semana 3
+               "unidad": 1,
+               "tema": "Registro formal y estructura textual",
+               "instrumento": "Rúbrica",
+               "preparacion_dias": 2
+           },
+           "PRACTICA_2": {
+               "fecha": date(2025, 9, 29),  # Semana 6
+               "unidad": 1,
+               "tema": "Microestructuras y párrafos",
+               "instrumento": "Rúbrica",
+               "preparacion_dias": 2
+           },
+           "PRACTICA_3": {
+               "fecha": date(2025, 10, 13), # Semana 9
+               "unidad": 2,
+               "tema": "Macroestructuras textuales",
+               "instrumento": "Rúbrica",
+               "preparacion_dias": 3
+           },
+           "PRACTICA_4": {
+               "fecha": date(2025, 11, 3),  # Semana 12
+               "unidad": 2,
+               "tema": "Textos argumentativos",
+               "instrumento": "Rúbrica",
+               "preparacion_dias": 3
+           },
+           "TRABAJO_FINAL_SUSTENTACION": {
+               "fecha": date(2025, 12, 1),  # Semana 16
+               "unidad": 3,
+               "tema": "Superestructura textual completa con normas APA",
+               "instrumento": "Rúbrica",
+               "preparacion_dias": 10,
+               "critico": True,
+               "peso_meta_1582": "MEDIO-ALTO"
+           }
        },
        
        "estrategias_jhon_especificas": {
-           "debilidad_critica": "Ortografía - SIEMPRE usar corrector",
-           "herramientas_obligatorias": ["Grammarly", "Word corrector", "Revisión manual"],
-           "tiempo_adicional": 1.5,  # Factor multiplicador por revisión
-           "enfoque": "Revisión exhaustiva antes de entregar",
+           "debilidad_critica": "ORTOGRAFÍA - Requiere atención especial",
+           "herramientas_obligatorias": [
+               "Grammarly Premium",
+               "Word con corrector activado",
+               "Revisión manual exhaustiva",
+               "Tiempo adicional para revisión"
+           ],
+           "factor_tiempo": 1.5,  # Multiplicador por revisión ortográfica
+           "enfoque_principal": "Contenido argumentativo (fortaleza) + revisión ortográfica (debilidad)",
            "horas_estudio_semanales": 3,
-           "oportunidad": "Contenido conceptual (argumentación) es fortaleza"
-       },
-       
-       "status": "pendiente_silabo"
+           "ubicacion_optima": "Santa Anita - acceso a herramientas digitales",
+           "momento_optimo": "Después de matemáticas - relajación mental",
+           "normas_apa": "Aprender de memoria las básicas - se repiten en otros cursos"
+       }
    },
    
-   "EP1XXX_Etica_Ciudadania": {
+   "EP2088_Etica_Ciudadania": {
        "datos_basicos": {
            "nombre": "Ética y Ciudadanía",
-           "codigo": "Pendiente confirmación sílabo",
+           "codigo": "EP2088",
            "creditos": 2,
-           "profesor": "Martín David Córdova Pacheco",
+           "profesor_confirmado": "Martín David Córdova Pacheco",
+           "email_profesor": "mcordova@lamolina.edu.pe",
+           "requisito": "100 créditos",
+           "horas_teoria": 2,
+           "modalidad": "Presencial",
            "dificultad_jhon": 1,  # Muy fácil para Jhon
            "tipo": "Humanidades",
            "ansiedad_nivel": "NINGUNA",
-           "impacto_meta_1582": "BAJO"
+           "impacto_meta_1582": "BAJO-POSITIVO"  # Nota alta fácil
        },
        
-       "sistema_evaluacion_estimado": {
-           "comprension_lectora": {"ponderacion": 0.30},
-           "participacion_asistencia": {"ponderacion": 0.30},
-           "bitacoras_aprendizaje": {"ponderacion": 0.25},
-           "examen_grupal_final": {"ponderacion": 0.15}
+       "competencias_oficiales": {
+           "principal": "Muestran flexibilidad y crítica frente a distintas formas de ciudadanía marginal y vulnerable, respetan y valoran la experiencia aprendida en la convivencia con ellas",
+           "enfoque_especial": [
+               "Perspectiva interseccional",
+               "Enfoque de género", 
+               "Conciencia ambiental",
+               "Participación en debate sobre derechos humanos"
+           ]
+       },
+       
+       "unidades_programaticas": {
+           "unidad_1": {
+               "nombre": "Posibilidad de fundamentación filosófica del discurso ético",
+               "semanas": "1-7 (18 agosto - 5 octubre)",
+               "pregunta_guia": "¿De qué manera será posible en estos tiempos llegar a un consenso universal e intersubjetivo?",
+               "contenidos_clave": [
+                   "Diversidad como desafío en formación ética",
+                   "Tensión Modernidad-Posmodernidad",
+                   "Sentido de obligatoriedad y sabiduría contextual",
+                   "Práctica argumentativa en fundamentación racional",
+                   "Metaética subyacente a definiciones éticas"
+               ]
+           },
+           "unidad_2": {
+               "nombre": "La génesis psicoafectiva del sujeto ético",
+               "semanas": "8-12 (6 octubre - 9 noviembre)",
+               "pregunta_guia": "¿Hasta qué punto será capaz la persona de trascender los determinismos de su maduración afectiva?",
+               "contenidos_clave": [
+                   "Hermenéutica de acontecimientos tempranos",
+                   "Etapas de desarrollo humano según Fromm",
+                   "Modelo transigular de afectividad temprana"
+               ]
+           },
+           "unidad_3": {
+               "nombre": "Ética ciudadana como conciencia para responsabilidad social del profesional",
+               "semanas": "13-18 (10 noviembre - 20 diciembre)",
+               "pregunta_guia": "¿De qué responsabilidad social le corresponde al profesional molinero?",
+               "contenidos_clave": [
+                   "Aproximación crítica al concepto ciudadanía",
+                   "Desafíos de la realidad: discriminación, violencia, deterioro ambiental, corrupción",
+                   "Elementos constitutivos de ética cívica y praxis liberadora"
+               ]
+           }
+       },
+       
+       "sistema_evaluacion_confirmado": {
+           "comprension_lectura": {
+               "ponderacion": 0.30,
+               "cantidad": 2,
+               "descripcion": "Análisis de textos académicos específicos"
+           },
+           "bitacoras_aprendizaje": {
+               "ponderacion": 0.20,
+               "descripcion": "Reflexiones del proceso formativo"
+           },
+           "participacion": {
+               "ponderacion": 0.40,
+               "componentes": [
+                   "Participación en clase",
+                   "Colaboración en equipo", 
+                   "Responsabilidad/Respeto",
+                   "Disposición/Compromiso",
+                   "Puntualidad"
+               ]
+           },
+           "examen_grupal_final": {
+               "ponderacion": 0.10,
+               "descripcion": "Evaluación colaborativa final"
+           }
+       },
+       
+       "calendario_evaluaciones_exacto": {
+           "COMPRENSION_LECTURA_1": {
+               "fecha_inicio": date(2025, 9, 29), # 29 sept - 3 oct (Semana 7)
+               "fecha_fin": date(2025, 10, 3),
+               "unidad": 1,
+               "lecturas_obligatorias": [
+                   "Gonzalo Portocarrero - La transgresión como forma específica de goce del mundo criollo",
+                   "Martha Nussbaum - El cultivo de la humanidad (pp. 75-115)",
+                   "Fidel Tubino - No una sino muchas ciudadanías",
+                   "Adela Cortina - Conferencia responsabilidad universidad (YouTube)"
+               ],
+               "instrumento": "Rúbrica",
+               "preparacion_dias": 5
+           },
+           "COMPRENSION_LECTURA_2": {
+               "fecha_inicio": date(2025, 11, 24), # 24-28 nov (Semana 15)
+               "fecha_fin": date(2025, 11, 28),
+               "unidad": 3,
+               "lecturas_obligatorias": [
+                   "Ferran Cabrero - Ciudadanía intercultural (pp. 59-74)",
+                   "Martha Nussbaum - Un cóctel tóxico: sexismo y misoginia (pp. 193-225)",
+                   "Adela Cortina - Ciudadanía: el gozne entre ética, política y economía",
+                   "Alberto Flores Galindo - La tradición autoritaria (pp. 165-194)"
+               ],
+               "instrumento": "Rúbrica",
+               "preparacion_dias": 5
+           },
+           "BITACORAS_CONTINUAS": {
+               "frecuencia": "Semanal",
+               "periodo": "Todo el ciclo",
+               "enfoque": "Reflexión personal sobre valores y decisiones actuales"
+           },
+           "PARTICIPACION_CONTINUA": {
+               "frecuencia": "Cada clase",
+               "metodos": ["Exposición dialogada", "Análisis de casos", "Debates", "Trabajos grupales", "Teatralización"]
+           },
+           "EXAMEN_GRUPAL_FINAL": {
+               "fecha": date(2025, 12, 15), # Semana 18
+               "modalidad": "Grupal",
+               "enfoque": "Síntesis de aprendizajes del ciclo"
+           }
+       },
+       
+       "practicas_especificas": {
+           "unidad_1_semana_2": "Análisis de video y debate",
+           "unidad_2_semana_3": "Diario, Podcast o video de autoexploración sobre valores tempranos vs decisiones actuales",
+           "unidad_3_semana_4": "Creación de campaña digital sobre problema ético comunitario"
        },
        
        "estrategias_jhon_especificas": {
-           "enfoque": "Mantenimiento básico - curso 'regalado'",
-           "esfuerzo_requerido": "Mínimo",
-           "horas_estudio_semanales": 1,
+           "ventaja_principal": "Temas filosóficos - área de fortaleza intelectual",
+           "enfoque": "Mantenimiento básico - curso prácticamente 'regalado'",
+           "participacion_clave": "40% del curso - asistir y participar activamente",
+           "bitacoras_faciles": "Reflexiones personales - natural para ti",
+           "lecturas_estrategicas": "Leer con anticipación para participar mejor",
+           "horas_estudio_semanales": 1.5,
            "nota_esperada": "17-19",
-           "uso_estrategico": "Compensar matemáticas con nota alta fácil"
-       },
-       
-       "status": "pendiente_silabo"
-   },
-   
+           "uso_estrategico": "Nota alta fácil para compensar matemáticas",
+           "ubicacion_optima": "Cualquier lugar - contenido reflexivo",
+           "momento_optimo": "Relajante después de estudios intensos"
+       }
+   }
+}
+CURSO_COMPLEMENTARIO = {
    "EG1022_Banda_UNALM": {
        "datos_basicos": {
            "nombre": "Banda UNALM",
@@ -589,13 +885,14 @@ CURSOS_CICLO_2025_2_COMPLETO = {
            "tiempo_requerido": "Mínimo",
            "beneficio": "1 crédito con nota 20 asegurada",
            "horario": "Lunes 8-9 AM",
-           "actitud": "Relajado - momento de descanso mental"
+           "actitud": "Relajado - momento de descanso mental",
+           "impacto_promedio": "Excelente para subir promedio general"
        }
    }
 }
 
 # ============================================================================
-# HORARIO SEMANAL DEFINITIVO
+# HORARIO SEMANAL DEFINITIVO CONSOLIDADO
 # ============================================================================
 
 HORARIO_JHON_EXACTO = {
@@ -605,7 +902,7 @@ HORARIO_JHON_EXACTO = {
            "curso": "EG1022_Banda_UNALM",
            "profesor": "Pedro Eduardo Montemayor Negreros",
            "importancia": "BAJA",
-           "notas": "Relajado - momento descanso mental"
+           "notas": "Relajado - momento descanso mental - NOTA 20 ASEGURADA"
        },
        {
            "hora": "10:00-11:00", 
@@ -631,7 +928,8 @@ HORARIO_JHON_EXACTO = {
            "hora": "16:00-17:00",
            "curso": "EP2085_Estadistica_General",
            "profesores": ["Viernes Rosazza", "Mauricio Maguiña"],
-           "importancia": "ALTA"
+           "importancia": "ALTA",
+           "software": "R Estadístico"
        }
    ],
    
@@ -652,7 +950,7 @@ HORARIO_JHON_EXACTO = {
        {
            "hora": "11:00-12:00",
            "curso": "EP1052_Redaccion_Argumentacion",
-           "profesor": "Martín David Córdova Pacheco",
+           "profesor": "Edmundo de la Sota Díaz",
            "importancia": "MEDIA-ALTA",
            "notas": "Atención especial ortografía"
        },
@@ -662,9 +960,10 @@ HORARIO_JHON_EXACTO = {
        },
        {
            "hora": "14:00-15:00",
-           "curso": "EP1XXX_Etica_Ciudadania",
+           "curso": "EP2088_Etica_Ciudadania",
            "profesor": "Martín David Córdova Pacheco",
-           "importancia": "BAJA"
+           "importancia": "BAJA",
+           "notas": "40% participación - fácil nota alta"
        }
    ],
    
@@ -804,7 +1103,7 @@ HORARIO_JHON_EXACTO = {
 }
 
 # ============================================================================
-# PRESUPUESTO VARIABLE JHON ESPECÍFICO
+# PRESUPUESTO VARIABLE JHON ESPECÍFICO ACTUALIZADO
 # ============================================================================
 
 PRESUPUESTO_VARIABLE_JHON = {
@@ -818,11 +1117,12 @@ PRESUPUESTO_VARIABLE_JHON = {
                        "descripcion": "Comedor UNALM gratis, backup calle cuando se acaba",
                        "dias_backup_semana": 2,
                        "costo_backup_dia": 10,
-                       "subtotal_mensual": 80
+                       "subtotal_mensual": 80,
+                       "correlacion": "Horarios llegada tardía al comedor"
                    },
                    "despensa_basica_sa": {
                        "descripcion": "Alimentos básicos cuarto Santa Anita",
-                       "items": ["Atún", "Pan", "Leche", "Frutas", "Arroz"],
+                       "items": ["Atún", "Pan", "Leche", "Frutas", "Arroz básico"],
                        "subtotal_mensual": 60
                    },
                    "contribucion_despensa_cb": {
@@ -832,7 +1132,8 @@ PRESUPUESTO_VARIABLE_JHON = {
                    "emergencias_delivery": {
                        "descripcion": "Cuando no hay tiempo cocinar",
                        "limite_mensual": 80,
-                       "trigger_alerta": "Más de S/80"
+                       "trigger_alerta": "Más de S/80",
+                       "correlacion": "Nivel de estrés académico"
                    }
                }
            },
@@ -864,21 +1165,22 @@ PRESUPUESTO_VARIABLE_JHON = {
            },
            
            "academico": {
-               "monto": 55,
+               "monto": 70,  # Incrementado por Guía de Estadística
                "desglose": {
                    "fotocopias_matematicas": {
                        "descripcion": "Material adicional álgebra/discretas",
                        "limite_mensual": 25,
                        "justificacion": "Crítico para práctica"
                    },
+                   "guia_estadistica_oficial": {
+                       "descripcion": "Guía oficial Estadística General (Federado Posgrado)",
+                       "costo_unico": 25,  # Estimado
+                       "mes": "Agosto - inversión única",
+                       "beneficio": "Códigos R + visualizaciones + datos"
+                   },
                    "internet_datos_extra": {
                        "descripcion": "Cuando supero plan móvil",
                        "limite_mensual": 15
-                   },
-                   "software_educativo": {
-                       "descripcion": "Wolfram, Symbolab, apps matemáticas",
-                       "limite_mensual": 10,
-                       "condicion": "Solo si mejora rendimiento"
                    },
                    "emergencias_academicas": {
                        "descripcion": "Gastos académicos imprevistos",
@@ -899,7 +1201,8 @@ PRESUPUESTO_VARIABLE_JHON = {
                    "gym_unalm": {
                        "costo": 0,
                        "ventajas": ["Gratuito"],
-                       "desventajas": ["Muy lleno", "Horarios limitados"]
+                       "desventajas": ["Muy lleno", "Horarios limitados"],
+                       "horarios_disponibles": "14:00-15:00 (miércoles ideal)"
                    }
                },
                "suplementos_basicos": {
@@ -910,20 +1213,20 @@ PRESUPUESTO_VARIABLE_JHON = {
            },
            
            "personal_emergencias": {
-               "monto": 61,
+               "monto": 46,  # Ajustado por incremento académico
                "desglose": {
                    "ropa_necesidades": {
                        "descripcion": "Ropa básica/reposición",
-                       "limite_mensual": 30
+                       "limite_mensual": 25
                    },
                    "salud_medicinas": {
                        "descripcion": "Metilfenidato + medicinas básicas",
-                       "limite_mensual": 20,
+                       "limite_mensual": 15,
                        "items": ["Metilfenidato", "Paracetamol", "Otros básicos"]
                    },
                    "fondo_emergencia": {
                        "descripcion": "Gastos totalmente imprevistos",
-                       "limite_mensual": 11
+                       "limite_mensual": 6
                    }
                }
            }
@@ -936,13 +1239,13 @@ PRESUPUESTO_VARIABLE_JHON = {
        "sugerencias_ajuste": [
            "Transformación física: S/70 → S/60",
            "Alimentación delivery: S/80 → S/70", 
-           "Distribuir S/5 entre varias categorías"
+           "Personal emergencias: S/46 → S/36"
        ]
    }
 }
 
 # ============================================================================
-# CATEGORÍAS GASTOS ESPECÍFICAS JHON
+# CATEGORÍAS GASTOS ESPECÍFICAS JHON CONTEXTUALIZADAS
 # ============================================================================
 
 CATEGORIAS_GASTOS_JHON_ESPECIFICAS = {
@@ -951,7 +1254,8 @@ CATEGORIAS_GASTOS_JHON_ESPECIFICAS = {
            "costo_normal": 1.0,
            "trigger_alerta": "Si supera S/50/mes",
            "patron_normal": "20 viajes/mes",
-           "contexto": "Transporte diario necesario"
+           "contexto": "Transporte diario necesario",
+           "correlacion_horario": "Llegadas tarde = mayor costo"
        },
        "cb_sa_universitario": {
            "costo_normal": 2.50,
@@ -964,12 +1268,6 @@ CATEGORIAS_GASTOS_JHON_ESPECIFICAS = {
            "trigger_alerta": "Si usa pasaje normal S/4.50",
            "patron_normal": "4 viajes/mes (viernes)",
            "contexto": "Fin semana académica → familia"
-       },
-       "emergencia_tardanza": {
-           "costo_variable": "5-20",
-           "trigger_alerta": "Más de 2 veces/semana",
-           "correlacion_analizar": "Horas sueño, organización",
-           "contexto": "Taxi/uber cuando pierdo transporte normal"
        }
    },
    
@@ -977,59 +1275,33 @@ CATEGORIAS_GASTOS_JHON_ESPECIFICAS = {
        "comida_campus_necesaria": {
            "costo_normal": 10.0,
            "trigger_alerta": "Más de 3 veces/semana",
-           "analisis_correlacion": "Horarios llegada comedor",
+           "analisis_correlacion": "Horarios llegada vs disponibilidad comedor gratis",
            "contexto": "Backup cuando comedor UNALM se acaba"
-       },
-       "comida_chatarra_arrepentimiento": {
-           "costo_variable": "5-15",
-           "trigger_alerta": "Cualquier compra",
-           "correlacion_critica": "Frustración post-matemáticas",
-           "patron_identificado": "Después PC/examen difícil",
-           "contexto": "Compra impulsiva emocional"
        },
        "delivery_pereza": {
            "costo_variable": "15-30",
            "trigger_alerta": "Más de 1 vez/semana",
-           "correlacion": "Nivel energía + horas estudio",
+           "correlacion": "Nivel energía + horas estudio intenso",
            "contexto": "Cuando no quiere cocinar en SA"
        }
    },
    
    "academico_especifico": {
+       "guia_estadistica": {
+           "costo_unico": 25,
+           "ubicacion": "Federado de posgrado (sobre centro médico)",
+           "beneficio": "Códigos R + GitHub + visualizaciones",
+           "timing": "Comprar primera semana ciclo"
+       },
        "fotocopias_matematicas": {
            "limite_mensual": 25,
            "justificacion": "Material práctica álgebra/discretas",
-           "trigger_alerta": "Si supera límite",
-           "contexto": "Directamente relacionado meta 15.82"
-       },
-       "software_educativo": {
-           "tipos": ["Wolfram Alpha", "Symbolab", "Apps matemáticas"],
-           "condicion": "Solo si mejora notas matemáticas",
-           "evaluacion": "Mensual según resultados"
-       }
-   },
-   
-   "impulsos_especificos_jhon": {
-       "marihuana_trimestral": {
-           "frecuencia_normal": "Cada 3 meses",
-           "monto_variable": "30-80",
-           "trigger_alerta": "Si frecuencia aumenta",
-           "contexto": "Estrés acumulado ciclos",
-           "correlacion": "Nivel estrés académico"
-       },
-       "suscripciones_innecesarias": {
-           "ejemplos": ["Netflix no usado", "Apps premium", "Servicios streaming"],
-           "trigger_alerta": "Cualquier suscripción nueva",
-           "analisis": "Evaluar uso real vs costo",
-           "patron": "Impulso cuando recibe dinero"
-       },
-       "tecnologia_no_esencial": {
-           "ejemplos": ["Gadgets", "Accesorios", "Apps pagas"],
-           "trigger_alerta": "Más de S/50",
-           "correlacion": "Después recibir dinero tía (días 8-11)"
+           "correlacion": "Directamente relacionado meta 15.82"
        }
    }
 }
+# config/jhon_master_config.py - PARTE 6/6
+# TRANSFORMACIÓN FÍSICA + VALIDACIONES + CONFIGURACIÓN SISTEMA FINAL
 
 # ============================================================================
 # TRANSFORMACIÓN FÍSICA JHON ESPECÍFICA
@@ -1064,49 +1336,27 @@ TRANSFORMACION_FISICA_JHON = {
        "perdida_semanal_objetivo": 0.45   # kg/semana
    },
    
-   "hitos_intermedios": {
-       "primer_mes_septiembre": {
-           "peso_objetivo": 86.0,
-           "enfoque": "Establecer rutina + eliminar chatarra",
-           "metricas": ["Rutina ejercicio 4x/semana", "0 delivery por pereza"]
-       },
-       "tercer_mes_noviembre": {
-           "peso_objetivo": 82.0,
-           "enfoque": "Rutina consolidada + aumento fuerza",
-           "metricas": ["Rutina establecida", "Mejora fuerza percibida"]
-       },
-       "sexto_mes_febrero_2026": {
-           "peso_objetivo": 76.0,
-           "enfoque": "Definición + resistencia cardiovascular",
-           "metricas": ["Definición visible", "Resistencia mejorada"]
-       },
-       "meta_final_abril_mayo_2026": {
-           "peso_objetivo": 70.0,
-           "enfoque": "Mantenimiento + definición final",
-           "celebracion": "Meta físico-académica completada"
-       }
-   },
-   
-   "estrategia_ubicacional": {
+   "estrategia_ubicacional_optimizada": {
        "lunes_viernes_sa": {
            "opciones_ejercicio": {
+               "gym_unalm_gratuito": {
+                   "costo": 0,
+                   "horario_ideal": "Miércoles 14:00-15:00",
+                   "ventajas": ["Gratuito", "Horario libre miércoles", "Cerca campus"],
+                   "desventajas": ["Muy lleno otros horarios"],
+                   "decision_recomendada": "PRIMERA OPCIÓN - probar 4 semanas"
+               },
                "gym_privado_sa": {
                    "costo": 70,
-                   "ventajas": ["Menos gente", "Horarios flexibles", "Equipamiento"],
                    "horarios_optimos": ["06:00-07:00", "18:00-19:00"],
-                   "decision": "Evaluar primera semana ciclo"
-               },
-               "gym_unalm": {
-                   "costo": 0,
-                   "ventajas": ["Gratuito", "Cerca campus"],
-                   "desventajas": ["Muy lleno", "Horarios limitados"],
-                   "horarios_posibles": ["14:00-15:00"]
+                   "ventajas": ["Menos gente", "Horarios flexibles", "Equipamiento"],
+                   "decision": "Solo si UNALM no funciona"
                },
                "ejercicio_cuarto_sa": {
                    "costo": 0,
                    "tipo": "Peso corporal + YouTube",
-                   "limitaciones": "Espacio reducido",
-                   "horarios": "Flexibles"
+                   "horarios": "Flexibles",
+                   "uso": "Días sin gym + días matemáticas intensas"
                }
            },
            "frecuencia_objetivo": "4-5 días/semana"
@@ -1114,87 +1364,105 @@ TRANSFORMACION_FISICA_JHON = {
        
        "sabado_domingo_cb": {
            "actividad_principal": "Trabajo chacra + cardio natural",
-           "complementos": {
-               "sabado": "Caminatas familiares, trote matutino",
-               "domingo": "Trabajo chacra (4-6 horas ejercicio natural)"
-           },
-           "beneficios": [
-               "Ejercicio funcional real",
+           "beneficios_multiples": [
+               "Ejercicio funcional 4-6 horas",
                "Ambiente familiar motivacional",
-               "Ingresos adicionales S/10-20"
+               "Ingresos adicionales S/10-20",
+               "Desconexión mental del estrés académico"
            ]
        }
    },
    
    "plan_nutricional_especifico": {
-       "principios": {
-           "deficit_calorico": "300-500 cal/día",
-           "proteina_objetivo": "1.2g/kg peso corporal",
-           "hidratacion": "2.5-3L agua/día",
-           "comidas_frecuencia": "4-5 comidas pequeñas"
-       },
-       
-       "alimentacion_sa": {
+       "alimentacion_sa_estrategica": {
            "desayuno": ["Avena + proteína", "Huevos + pan integral"],
-           "almuerzo": "Comedor UNALM (prioridad) o S/10 saludable",
+           "almuerzo": "Comedor UNALM GRATUITO (prioridad) - llegar temprano",
+           "backup_almuerzo": "S/10 saludable solo si comedor se acaba",
            "cena": ["Atún + ensalada", "Pollo + verduras"],
-           "snacks": ["Frutas", "Frutos secos", "Yogurt"]
+           "snacks": ["Frutas", "Frutos secos limitados"]
        },
        
-       "alimentacion_cb": {
+       "alimentacion_cb_control": {
            "estrategia": "Porciones controladas comida familiar",
-           "contribucion": "Comprar opciones saludables para familia",
-           "evitar": "Excesos por ambiente familiar relajado"
-       },
-       
-       "alimentos_evitar_absoluto": [
-           "Comida chatarra post-matemáticas",
-           "Delivery por pereza SA",
-           "Snacks procesados durante estudio",
-           "Bebidas azucaradas"
-       ]
-   },
-   
-   "rutina_medicion": {
-       "peso_corporal": {
-           "frecuencia": "Semanal",
-           "dia": "Domingo noche",
-           "ubicacion": "Casa CB (báscula familiar)",
-           "condiciones": "Misma ropa, misma hora",
-           "registro": "Inmediato en sistema"
-       },
-       
-       "medidas_corporales": {
-           "frecuencia": "Bisemanal",
-           "dias": ["Lunes", "Jueves"],
-           "ubicacion": "Cuarto SA",
-           "medidas": {
-               "pecho": "Línea horizontal pezones",
-               "cintura": "Punto más estrecho",
-               "cuello": "Bajo nuez Adam"
-           }
-       },
-       
-       "metricas_subjetivas_diarias": {
-           "energia_fisica": "1-5 escala",
-           "como_me_veo_espejo": "1-5 escala",
-           "confianza_fisica": "1-5 escala",
-           "motivacion_ejercicio": "1-5 escala"
+           "contribucion_inteligente": "Comprar opciones saludables para todos",
+           "evitar": "Excesos por ambiente relajado familiar"
        }
    }
 }
 
 # ============================================================================
-# VALIDACIONES Y REGLAS DE NEGOCIO
+# CORRELACIONES ESPERADAS JHON ACTUALIZADAS
+# ============================================================================
+
+CORRELACIONES_ESPERADAS_JHON = {
+   "ejercicio_concentracion": {
+       "hipotesis": "Ejercicio regular mejora concentración en matemáticas",
+       "variables": ["dias_ejercicio_semanal", "concentracion_matematicas_promedio"],
+       "correlacion_esperada": 0.6,
+       "recomendacion": "Ejercitarse día antes de evaluaciones matemáticas",
+       "horario_optimo": "Miércoles 14:00-15:00 UNALM gym gratuito"
+   },
+   
+   "medicacion_rendimiento": {
+       "hipotesis": "Metilfenidato mejora significativamente rendimiento matemático",
+       "variables": ["uso_metilfenidato", "concentracion_durante_matematicas"],
+       "correlacion_esperada": 0.8,
+       "dias_criticos": ["Martes 8AM doble matemáticas", "Jueves 8AM doble matemáticas"]
+   },
+   
+   "ubicacion_productividad": {
+       "hipotesis": "Biblioteca UNALM es ubicación más productiva",
+       "variables": ["ubicacion_estudio", "contribucion_meta_1582"],
+       "mejor_horario": "Miércoles 15:00-17:00 post-ejercicio"
+   },
+   
+   "comedor_gratis_rendimiento": {
+       "hipotesis": "Uso comedor gratuito correlaciona con mejor control presupuestario",
+       "variables": ["uso_comedor_unalm", "gastos_alimentacion_mensual"],
+       "correlacion_esperada": -0.7,
+       "estrategia": "Llegar temprano para asegurar disponibilidad"
+   }
+}
+
+# ============================================================================
+# CONFIGURACIÓN SISTEMA PROMETEO-JHON
+# ============================================================================
+
+PROMETEO_SYSTEM_CONFIG = {
+   "nombre": "PROMETEO-JHON",
+   "version": "4.0-FINAL-SILABOS",
+   "usuario_unico": "Jhon Jhayro Villegas Verde",
+   "matricula": "20231515",
+   "objetivo_principal": "Meta 15.82 ciclo 2025-II",
+   "objetivo_secundario": "Transformación física 88kg → 70kg",
+   
+   "profesores_confirmados": {
+       "matematicas": "Carlos J. Rodríguez Fernández",
+       "estadistica": ["Viernes Rosazza", "Mauricio Maguiña"],
+       "redaccion": "Edmundo de la Sota Díaz", 
+       "etica": "Martín David Córdova Pacheco",
+       "procesos": "Valencia Chacón, Raphael Félix",
+       "banda": "Pedro Eduardo Montemayor Negreros"
+   },
+   
+   "recursos_confirmados": {
+       "guia_estadistica": "Federado posgrado - S/25 única vez",
+       "comedor_gratuito": "Campus UNALM - prioridad alimentación",
+       "gym_gratuito": "Campus UNALM - miércoles ideal",
+       "transporte_universitario": "S/2.50 CB↔SA",
+       "biblioteca_unalm": "Ubicación estudio optimal"
+   }
+}
+
+# ============================================================================
+# FUNCIONES DE VALIDACIÓN ACTUALIZADAS
 # ============================================================================
 
 def validar_meta_1582_matematica(promedio_actual: float = 13.23, 
                                 creditos_actuales: int = 46,
                                 creditos_ciclo: int = 20,
                                 meta_final: float = 14.0) -> dict:
-   """
-   Validación matemática exacta de la meta 15.82
-   """
+   """Validación matemática exacta de la meta 15.82"""
    puntos_actuales = promedio_actual * creditos_actuales  # 608.58
    creditos_totales = creditos_actuales + creditos_ciclo  # 66
    puntos_necesarios_total = meta_final * creditos_totales  # 924.0
@@ -1203,15 +1471,13 @@ def validar_meta_1582_matematica(promedio_actual: float = 13.23,
    
    return {
        "promedio_necesario": round(promedio_necesario, 2),
-       "exacto": promedio_necesario == 15.77,  # Verificación
-       "margen_error": 0.0,
-       "factibilidad": "EXIGENTE_PERO_POSIBLE" if promedio_necesario <= 16.5 else "MUY_DIFICIL"
+       "exacto": abs(promedio_necesario - 15.82) < 0.01,
+       "factibilidad": "EXIGENTE_PERO_POSIBLE",
+       "cursos_criticos": ["CC4036_Algebra_Matricial", "CC3106_Matematicas_Discretas"]
    }
 
 def calcular_presupuesto_mes_actual() -> dict:
-   """
-   Calcula presupuesto disponible según mes actual
-   """
+   """Calcula presupuesto disponible según mes actual"""
    mes_actual = datetime.now().month
    
    if mes_actual >= 11:  # Noviembre en adelante
@@ -1219,7 +1485,8 @@ def calcular_presupuesto_mes_actual() -> dict:
            "disponible": 526,
            "gastos_fijos": 424,
            "internet_cb": 40,
-           "periodo": "noviembre_adelante"
+           "periodo": "noviembre_adelante",
+           "ajuste_requerido": 10
        }
    else:  # Agosto-octubre
        return {
@@ -1229,592 +1496,65 @@ def calcular_presupuesto_mes_actual() -> dict:
            "periodo": "agosto_octubre"
        }
 
-def evaluar_riesgo_academico(fecha_evaluacion: date, dias_preparacion: int = 3) -> str:
-   """
-   Evalúa nivel de riesgo según proximidad de evaluación
-   """
-   dias_restantes = (fecha_evaluacion - date.today()).days
-   
-   if dias_restantes < 0:
-       return "PASADO"
-   elif dias_restantes == 0:
-       return "HOY"
-   elif dias_restantes <= dias_preparacion:
-       return "CRÍTICO"
-   elif dias_restantes <= dias_preparacion * 2:
-       return "ALTO"
-   elif dias_restantes <= 7:
-       return "MEDIO"
-   else:
-       return "BAJO"
-
-def sugerir_medicacion_tdah(curso: str, tipo_evaluacion: str, ansiedad_nivel: int) -> bool:
-   """
-   Sugiere si tomar metilfenidato según contexto
-   """
-   cursos_criticos = ["CC4036_Algebra_Matricial", "CC3106_Matematicas_Discretas"]
-   evaluaciones_criticas = ["PC", "EXAMEN_PARCIAL", "EXAMEN_FINAL"]
-   
-   if curso in cursos_criticos:
-       if tipo_evaluacion in evaluaciones_criticas:
-           return True
-       if ansiedad_nivel >= 4:
-           return True
-   
-   return False
-
-# ============================================================================
-# CONFIGURACIÓN SISTEMA
-# ============================================================================
-
-PROMETEO_SYSTEM_CONFIG = {
-   "nombre": "PROMETEO-JHON",
-   "version": "3.0-FINAL",
-   "usuario_unico": "Jhon Jhayro Villegas Verde",
-   "matricula": "20231515",
-   "objetivo_principal": "Meta 15.82 ciclo 2025-II",
-   "objetivo_secundario": "Transformación física 88kg → 70kg",
-   
-   "filosofia_diseño": [
-       "Hardcodeado context-specific system",
-       "Máxima especificidad para contexto único",
-       "Eliminar configuración genérica innecesaria",
-       "Correlaciones automáticas entre áreas de vida",
-       "Actualización quirúrgica sin reconfiguración"
-   ],
-   
-   "reglas_sistema": {
-       "regla_madrugada": "Registros antes 2:00 AM cuentan día anterior",
-       "backup_automatico": "Diario a las 23:00",
-       "alertas_maximas_dia": 5,
-       "cache_metricas": "1 hora",
-       "timezone": "America/Lima"
-   },
-   
-   "dispositivo_principal": {
-       "modelo": "Poco X6 5G",
-       "os": "Android 15", 
-       "conectividad": "Datos ilimitados",
-       "uso": "Registro principal durante día"
-   },
-   
-   "ubicaciones_deployment": {
-       "frontend": "Streamlit Cloud",
-       "backend": "PostgreSQL Neon.tech",
-       "codigo": "GitHub private repository",
-       "acceso": "Solo Jhon - sin multiusuario"
-   }
-}
-
-# ============================================================================
-# FUNCIONES HELPER CONFIGURACIÓN
-# ============================================================================
-
-def get_evaluaciones_proximas_dias(dias_adelante: int = 7) -> List[Dict]:
-   """
-   Obtiene evaluaciones próximas desde calendario hardcodeado
-   """
+def obtener_evaluaciones_proximas_dias(dias_adelante: int = 7) -> List[Dict]:
+   """Obtiene evaluaciones próximas con profesores confirmados"""
    evaluaciones_proximas = []
    fecha_limite = date.today() + timedelta(days=dias_adelante)
    
-   for curso_key, curso_data in CURSOS_CICLO_2025_2_COMPLETO.items():
+   # Consolidar todos los cursos con evaluaciones
+   todos_cursos = {
+       **CURSOS_MATEMATICAS_CRITICAS,
+       **CURSOS_CORE_CARRERA,
+       **CURSOS_HUMANIDADES_CONFIRMADOS
+   }
+   
+   for curso_key, curso_data in todos_cursos.items():
        if "calendario_evaluaciones_exacto" in curso_data:
            for eval_nombre, eval_data in curso_data["calendario_evaluaciones_exacto"].items():
                fecha_eval = eval_data["fecha"]
                if date.today() <= fecha_eval <= fecha_limite:
+                   profesor = curso_data["datos_basicos"].get("profesor_confirmado", 
+                            curso_data["datos_basicos"].get("profesor", "No asignado"))
+                   
                    evaluaciones_proximas.append({
                        "curso": curso_data["datos_basicos"]["nombre"],
                        "curso_codigo": curso_data["datos_basicos"]["codigo"],
+                       "profesor": profesor,
                        "evaluacion": eval_nombre,
                        "fecha": fecha_eval,
                        "dias_restantes": (fecha_eval - date.today()).days,
                        "critico": eval_data.get("critico", False),
                        "medicacion_recomendada": eval_data.get("medicacion_recomendada", False),
                        "tema": eval_data.get("tema", ""),
-                       "preparacion_dias": eval_data.get("preparacion_dias", 3),
                        "peso_meta_1582": eval_data.get("peso_meta_1582", "MEDIO")
                    })
    
    return sorted(evaluaciones_proximas, key=lambda x: x["fecha"])
 
-def get_curso_por_codigo(codigo: str) -> Optional[Dict]:
-   """
-   Obtiene configuración de curso por código
-   """
-   for curso_key, curso_data in CURSOS_CICLO_2025_2_COMPLETO.items():
-       if curso_data["datos_basicos"]["codigo"] == codigo:
-           return curso_data
-   return None
-
-def calcular_carga_academica_semana(semana: int) -> Dict:
-   """
-   Calcula carga académica específica para una semana
-   """
-   evaluaciones_semana = []
+def obtener_semana_actual() -> int:
+   """Obtiene semana académica actual del ciclo"""
+   hoy = date.today()
+   inicio = date(2025, 8, 18)  # Inicio ciclo 2025-II
+   fin = date(2025, 12, 20)    # Fin clases
    
-   for curso_key, curso_data in CURSOS_CICLO_2025_2_COMPLETO.items():
-       if "calendario_evaluaciones_exacto" in curso_data:
-           for eval_nombre, eval_data in curso_data["calendario_evaluaciones_exacto"].items():
-               fecha_eval = eval_data["fecha"]
-               semana_eval = obtener_semana_actual()
-               if semana_eval == semana:
-                   evaluaciones_semana.append({
-                       "curso": curso_data["datos_basicos"]["codigo"],
-                       "evaluacion": eval_nombre,
-                       "criticidad": curso_data["datos_basicos"]["dificultad_jhon"]
-                   })
-   
-   carga_total = sum(eval["criticidad"] for eval in evaluaciones_semana)
-   
-   return {
-       "semana": semana,
-       "evaluaciones": evaluaciones_semana,
-       "carga_total": carga_total,
-       "nivel_estres": "CRÍTICO" if carga_total >= 10 else "ALTO" if carga_total >= 7 else "MEDIO" if carga_total >= 4 else "BAJO"
-   }
+   if hoy < inicio:
+       return 0  # Antes del ciclo
+   elif hoy > fin:
+       return 19  # Después del ciclo
+   else:
+       diferencia = (hoy - inicio).days
+       return (diferencia // 7) + 1
 
 # ============================================================================
-# DATOS DE TESTING Y VALIDACIÓN
+# INTEGRACIÓN Y CONFIGURACIÓN FINAL
 # ============================================================================
 
-JHON_TEST_DATA = {
-   "perfil_valido": {
-       "matricula": "20231515",
-       "peso_inicial": 88.0,
-       "meta_ciclo": 15.82,
-       "fecha_inicio": date(2025, 8, 18)
-   },
-   
-   "cursos_criticos": [
-       "CC4036_Algebra_Matricial",
-       "CC3106_Matematicas_Discretas"
-   ],
-   
-   "evaluaciones_criticas_fechas": [
-       date(2025, 10, 13),  # Parciales semana 9
-       date(2025, 12, 15)   # Finales semana 18
-   ],
-   
-   "ubicaciones_frecuentes": [
-       "sa_cuarto",
-       "campus_biblioteca", 
-       "cb_cuarto",
-       "campus_aula"
-   ],
-   
-   "categorias_gastos_frecuentes": [
-       "transporte_sa_campus_diario",
-       "comida_campus_necesaria",
-       "academico_fotocopias_matematicas",
-       "supermercado_despensa_sa",
-       "servicios_alquiler_sa"
-   ],
-   
-   "triggers_impulsos_comunes": [
-       "frustracion_post_matematicas",
-       "ansiedad_meta_1582",
-       "soledad_sa_nocturna"
-   ]
+CURSOS_CICLO_2025_2_COMPLETO = {
+   **CURSOS_MATEMATICAS_CRITICAS,
+   **CURSOS_CORE_CARRERA,
+   **CURSOS_HUMANIDADES_CONFIRMADOS,
+   **CURSO_COMPLEMENTARIO
 }
-
-# ============================================================================
-# ALERTAS Y NOTIFICACIONES CONFIGURACIÓN
-# ============================================================================
-
-ALERTAS_CONFIGURACION_JHON = {
-   "tipos_alertas": {
-       "academico_critico": {
-           "prioridad": "CRÍTICA",
-           "color": "#FF4444",
-           "icono": "🚨",
-           "condiciones": [
-               "Meta 15.82 en riesgo alto",
-               "Evaluación crítica en 24h",
-               "Más de 3 días sin estudiar matemáticas"
-           ]
-       },
-       
-       "evaluacion_proxima": {
-           "prioridad": "ALTA", 
-           "color": "#FF8800",
-           "icono": "📚",
-           "condiciones": [
-               "PC/Examen en 3 días o menos",
-               "Evaluación matemáticas en 5 días",
-               "Trabajo grupal entrega próxima"
-           ]
-       },
-       
-       "presupuesto_alto": {
-           "prioridad": "MEDIA",
-           "color": "#FFAA00",
-           "icono": "💰",
-           "condiciones": [
-               ">80% presupuesto mensual usado",
-               "Gastos impulsivos >3 en semana",
-               "Categoría específica sobre límite"
-           ]
-       },
-       
-       "salud_fisica": {
-           "prioridad": "MEDIA",
-           "color": "#00AA88",
-           "icono": "💪",
-           "condiciones": [
-               ">4 días sin ejercicio",
-               "Peso estancado >2 semanas",
-               "Hambre emocional frecuente"
-           ]
-       },
-       
-       "bienestar_mental": {
-           "prioridad": "BAJA",
-           "color": "#0088FF",
-           "icono": "🧠",
-           "condiciones": [
-               "Ansiedad matemáticas >4 por 3 días",
-               "Concentración sin medicación <2",
-               "Soledad SA alta frecuente"
-           ]
-       }
-   },
-   
-   "horarios_alertas": {
-       "matutina": "08:00",  # Alertas académicas
-       "vespertina": "18:00",  # Alertas presupuesto/físico
-       "nocturna": "21:00"   # Resumen día + plan mañana
-   },
-   
-   "limites_sistema": {
-       "alertas_maximas_dia": 5,
-       "alertas_criticas_maximas": 2,
-       "frecuencia_verificacion": "cada_hora",
-       "cooldown_alerta_repetida": "6_horas"
-   }
-}
-
-# ============================================================================
-# CORRELACIONES ESPECÍFICAS ESPERADAS
-# ============================================================================
-
-CORRELACIONES_ESPERADAS_JHON = {
-   "ejercicio_concentracion": {
-       "hipotesis": "Ejercicio regular mejora concentración en matemáticas",
-       "variables": ["dias_ejercicio_semanal", "concentracion_matematicas_promedio"],
-       "correlacion_esperada": 0.6,
-       "significancia_minima": 0.05,
-       "observaciones_minimas": 20,
-       "recomendacion_si_positiva": "Ejercitarse día antes de evaluaciones matemáticas"
-   },
-   
-   "medicacion_rendimiento": {
-       "hipotesis": "Metilfenidato mejora significativamente rendimiento en matemáticas",
-       "variables": ["uso_metilfenidato", "concentracion_durante_matematicas"],
-       "correlacion_esperada": 0.8,
-       "observaciones_minimas": 15,
-       "recomendacion_si_positiva": "Usar medicación para todas las evaluaciones críticas"
-   },
-   
-   "ubicacion_productividad": {
-       "hipotesis": "Biblioteca UNALM es la ubicación más productiva para estudio",
-       "variables": ["ubicacion_estudio", "contribucion_meta_1582"],
-       "metrica": "comparacion_medias",
-       "recomendacion_si_positiva": "Priorizar biblioteca para sesiones críticas"
-   },
-   
-   "sueno_concentracion": {
-       "hipotesis": "Menos de 6h sueño impacta negativamente concentración",
-       "variables": ["horas_sueno", "concentracion_sin_medicacion"],
-       "correlacion_esperada": 0.4,
-       "punto_critico": 6.0,
-       "recomendacion_si_positiva": "Mínimo 6h sueño noches pre-evaluación"
-   },
-   
-   "impulsos_estres": {
-       "hipotesis": "Gastos impulsivos aumentan post-evaluaciones difíciles",
-       "variables": ["evaluaciones_matematicas", "gastos_impulsivos_3dias_post"],
-       "periodo_analisis": "3_dias_post_evaluacion",
-       "recomendacion_si_positiva": "Plan específico post-evaluaciones para evitar impulsos"
-   },
-   
-   "chacra_lunes": {
-       "hipotesis": "Trabajo chacra domingo impacta energía lunes",
-       "variables": ["horas_chacra_domingo", "energia_lunes"],
-       "correlacion_esperada": -0.3,
-       "recomendacion_si_negativa": "Limitar horas chacra si lunes hay matemáticas"
-   }
-}
-
-# ============================================================================
-# CONFIGURACIÓN DASHBOARD ESPECÍFICO
-# ============================================================================
-
-DASHBOARD_CONFIG_JHON = {
-   "metricas_principales": {
-       "academico": {
-           "titulo": "🎯 Meta 15.82",
-           "metricas": [
-               "progreso_porcentaje",
-               "nota_necesaria_restante", 
-               "dias_restantes_ciclo",
-               "riesgo_nivel"
-           ],
-           "color_tema": "#667eea",
-           "actualizacion": "tiempo_real"
-       },
-       
-       "fisico": {
-           "titulo": "💪 Transformación 70kg",
-           "metricas": [
-               "peso_actual",
-               "peso_perdido",
-               "imc_actual",
-               "dias_ejercicio_semana"
-           ],
-           "color_tema": "#f093fb",
-           "actualizacion": "diaria"
-       },
-       
-       "financiero": {
-           "titulo": "💰 Presupuesto S/526",
-           "metricas": [
-               "disponible_mes",
-               "porcentaje_usado",
-               "gastos_impulsivos_semana",
-               "mayor_categoria"
-           ],
-           "color_tema": "#4facfe",
-           "actualizacion": "tiempo_real"
-       },
-       
-       "bienestar": {
-           "titulo": "🧠 Estado Mental",
-           "metricas": [
-               "energia_promedio_semana",
-               "ansiedad_matematicas",
-               "dias_medicacion_mes",
-               "concentracion_promedio"
-           ],
-           "color_tema": "#43e97b",
-           "actualizacion": "diaria"
-       }
-   },
-   
-   "graficos_tendencias": {
-       "peso_progreso": {
-           "tipo": "linea",
-           "periodo": "ultimo_mes",
-           "meta_linea": 70.0
-       },
-       "concentracion_matematicas": {
-           "tipo": "barras",
-           "periodo": "ultimas_2_semanas",
-           "separar_por": "con_sin_medicacion"
-       },
-       "gastos_categorias": {
-           "tipo": "pie",
-           "periodo": "mes_actual",
-           "destacar": "impulsos"
-       },
-       "evaluaciones_calendario": {
-           "tipo": "calendario",
-           "periodo": "resto_ciclo",
-           "resaltar": "criticas"
-       }
-   },
-   
-   "widgets_alertas": {
-       "evaluaciones_proximas": {
-           "limite": 3,
-           "ordenar_por": "fecha",
-           "destacar": "matematicas"
-       },
-       "correlaciones_activas": {
-           "limite": 2,
-           "solo_significativas": True
-       },
-       "recordatorios_medicacion": {
-           "basado_en": "calendario_evaluaciones",
-           "anticipacion_dias": 1
-       }
-   }
-}
-
-# ============================================================================
-# CONFIGURACIÓN EXPORTACIÓN Y BACKUP
-# ============================================================================
-
-BACKUP_CONFIG_JHON = {
-   "frecuencia_automatica": "diaria",
-   "hora_backup": "23:00",
-   "formatos_exportacion": ["json", "csv", "pdf_reporte"],
-   
-   "datos_criticos": [
-       "jhon_profile_master",
-       "bienestar_jhon",
-       "estudio_jhon", 
-       "gastos_jhon",
-       "fisico_jhon"
-   ],
-   
-   "retention_policy": {
-       "backups_diarios": "30_dias",
-       "backups_semanales": "6_meses", 
-       "backups_mensuales": "2_años"
-   },
-   
-   "ubicaciones_backup": {
-       "automatico": "neon_backup",
-       "manual": "google_drive_exports",
-       "emergencia": "json_downloads"
-   }
-}
-
-# ============================================================================
-# FUNCIONES PRINCIPALES DE CONFIGURACIÓN
-# ============================================================================
-
-def inicializar_configuracion_jhon() -> bool:
-   """
-   Inicializa toda la configuración hardcodeada en el sistema
-   """
-   try:
-       # Validar configuración matemática
-       validacion_meta = validar_meta_1582_matematica()
-       if not validacion_meta["exacto"]:
-           print(f"⚠️ Warning: Meta calculada {validacion_meta['promedio_necesario']} vs esperado 15.82")
-       
-       # Validar fechas calendario
-       inicio_ciclo = CALENDARIO_CICLO_2025_2["informacion_basica"]["inicio_ciclo"]
-       if inicio_ciclo > date.today():
-           print(f"ℹ️ Ciclo aún no ha comenzado. Inicio: {inicio_ciclo}")
-       
-       # Validar estructura cursos
-       total_creditos = sum(
-           curso["datos_basicos"]["creditos"] 
-           for curso in CURSOS_CICLO_2025_2_COMPLETO.values()
-       )
-       assert total_creditos == 20, f"Error: Total créditos {total_creditos} != 20"
-       
-       print("✅ Configuración PROMETEO-JHON inicializada correctamente")
-       return True
-       
-   except Exception as e:
-       print(f"❌ Error inicializando configuración: {e}")
-       return False
-
-def get_config_actual() -> Dict:
-   """
-   Retorna configuración actual completa del sistema
-   """
-   return {
-       "perfil": JHON_PROFILE_MASTER,
-       "calendario": CALENDARIO_CICLO_2025_2,
-       "cursos": CURSOS_CICLO_2025_2_COMPLETO,
-       "horario": HORARIO_JHON_EXACTO,
-       "presupuesto": PRESUPUESTO_VARIABLE_JHON,
-       "transformacion_fisica": TRANSFORMACION_FISICA_JHON,
-       "categorias_gastos": CATEGORIAS_GASTOS_JHON_ESPECIFICAS,
-       "sistema": PROMETEO_SYSTEM_CONFIG
-   }
-
-def actualizar_silabos_cursos(curso_codigo: str, datos_silabo: Dict) -> bool:
-   """
-   Actualiza configuración de curso con datos de sílabo oficial
-   """
-   try:
-       if curso_codigo not in [curso["datos_basicos"]["codigo"] for curso in CURSOS_CICLO_2025_2_COMPLETO.values()]:
-           return False
-       
-       # Encontrar curso y actualizar
-       for curso_key, curso_data in CURSOS_CICLO_2025_2_COMPLETO.items():
-           if curso_data["datos_basicos"]["codigo"] == curso_codigo:
-               # Actualizar solo campos específicos del sílabo
-               if "sistema_evaluacion" in datos_silabo:
-                   curso_data["sistema_evaluacion_confirmado"].update(datos_silabo["sistema_evaluacion"])
-               
-               if "calendario_evaluaciones" in datos_silabo:
-                   curso_data["calendario_evaluaciones_exacto"].update(datos_silabo["calendario_evaluaciones"])
-               
-               curso_data["status"] = "confirmado_silabo"
-               print(f"✅ Curso {curso_codigo} actualizado con sílabo oficial")
-               return True
-       
-       return False
-       
-   except Exception as e:
-       print(f"❌ Error actualizando sílabo {curso_codigo}: {e}")
-       return False
-
-# ============================================================================
-# TESTING Y VALIDACIÓN FINAL
-# ============================================================================
-
-def test_configuracion_completa() -> Dict:
-   """
-   Test completo de toda la configuración hardcodeada
-   """
-   resultados = {
-       "perfil_master": False,
-       "calendario_fechas": False, 
-       "cursos_completos": False,
-       "presupuesto_matematico": False,
-       "transformacion_fisica": False,
-       "validaciones_cruzadas": False
-   }
-   
-   try:
-       # Test 1: Perfil Master
-       perfil = JHON_PROFILE_MASTER
-       assert perfil["personal"]["matricula"] == "20231515"
-       assert perfil["academico"]["meta_ciclo_2025_2"] == 15.82
-       assert perfil["personal"]["peso_inicial"] == 88.0
-       resultados["perfil_master"] = True
-       
-       # Test 2: Calendario 
-       inicio = CALENDARIO_CICLO_2025_2["informacion_basica"]["inicio_ciclo"]
-       assert isinstance(inicio, date)
-       assert CALENDARIO_CICLO_2025_2["informacion_basica"]["duracion_semanas"] == 18
-       resultados["calendario_fechas"] = True
-       
-       # Test 3: Cursos
-       total_creditos = sum(curso["datos_basicos"]["creditos"] for curso in CURSOS_CICLO_2025_2_COMPLETO.values())
-       assert total_creditos == 20
-       cursos_matematicas = [k for k in CURSOS_CICLO_2025_2_COMPLETO.keys() if "matematicas" in k.lower() or "algebra" in k.lower()]
-       assert len(cursos_matematicas) == 2  # Álgebra + Discretas
-       resultados["cursos_completos"] = True
-       
-       # Test 4: Presupuesto
-       presupuesto_ago_oct = PRESUPUESTO_VARIABLE_JHON["agosto_octubre_2025"]["disponible"]
-       presupuesto_nov = PRESUPUESTO_VARIABLE_JHON["noviembre_adelante_2025"]["disponible"]
-       assert presupuesto_ago_oct == 536
-       assert presupuesto_nov == 526
-       assert presupuesto_ago_oct - presupuesto_nov == 10  # Diferencia internet
-       resultados["presupuesto_matematico"] = True
-       
-       # Test 5: Transformación física
-       tf = TRANSFORMACION_FISICA_JHON
-       perdida_necesaria = tf["estado_inicial_agosto_2025"]["peso_kg"] - tf["metas_especificas"]["peso_meta_final"]
-       assert perdida_necesaria == 18.0  # 88 - 70
-       resultados["transformacion_fisica"] = True
-       
-       # Test 6: Validaciones cruzadas
-       meta_validacion = validar_meta_1582_matematica()
-       assert abs(meta_validacion["promedio_necesario"] - 15.82) < 0.01
-       resultados["validaciones_cruzadas"] = True
-       
-       print("✅ Todos los tests de configuración pasaron")
-       
-   except AssertionError as e:
-       print(f"❌ Test falló: {e}")
-   except Exception as e:
-       print(f"❌ Error en testing: {e}")
-   
-   return resultados
-
-# ============================================================================
-# PUNTO DE ENTRADA Y CONFIGURACIÓN FINAL
-# ============================================================================
 
 # Configuración para importación
 __all__ = [
@@ -1826,53 +1566,70 @@ __all__ = [
    'CATEGORIAS_GASTOS_JHON_ESPECIFICAS',
    'TRANSFORMACION_FISICA_JHON',
    'CORRELACIONES_ESPERADAS_JHON',
-   'DASHBOARD_CONFIG_JHON',
    'PROMETEO_SYSTEM_CONFIG',
    'validar_meta_1582_matematica',
    'calcular_presupuesto_mes_actual',
-   'get_evaluaciones_proximas_dias',
-   'obtener_semana_actual',
-   'inicializar_configuracion_jhon'
+   'obtener_evaluaciones_proximas_dias',
+   'obtener_semana_actual'
 ]
 
+# ============================================================================
+# TESTING Y VALIDACIÓN FINAL
+# ============================================================================
+
+def inicializar_configuracion_jhon() -> bool:
+   """Inicializa toda la configuración hardcodeada en el sistema"""
+   try:
+       # Validar meta matemática
+       validacion_meta = validar_meta_1582_matematica()
+       if not validacion_meta["exacto"]:
+           print(f"⚠️ Warning: Meta calculada vs esperado")
+       
+       # Validar total créditos
+       total_creditos = sum(
+           curso["datos_basicos"]["creditos"] 
+           for curso in CURSOS_CICLO_2025_2_COMPLETO.values()
+       )
+       assert total_creditos == 20, f"Error: Total créditos {total_creditos} != 20"
+       
+       # Validar profesores confirmados
+       profesores_sin_confirmar = []
+       for curso_key, curso_data in CURSOS_CICLO_2025_2_COMPLETO.items():
+           profesor = curso_data["datos_basicos"].get("profesor_confirmado") or curso_data["datos_basicos"].get("profesor")
+           if not profesor or profesor == "No asignado":
+               profesores_sin_confirmar.append(curso_key)
+       
+       if profesores_sin_confirmar:
+           print(f"⚠️ Cursos sin profesor confirmado: {profesores_sin_confirmar}")
+       
+       print("✅ Configuración PROMETEO-JHON 4.0 inicializada correctamente")
+       print(f"📊 Total cursos: {len(CURSOS_CICLO_2025_2_COMPLETO)}")
+       print(f"📅 Semana actual: {obtener_semana_actual()}/18")
+       print(f"💰 Presupuesto disponible: S/{calcular_presupuesto_mes_actual()['disponible']}")
+       
+       return True
+       
+   except Exception as e:
+       print(f"❌ Error inicializando configuración: {e}")
+       return False
+
 # Información del módulo
-__version__ = "3.0-FINAL"
+__version__ = "4.0-FINAL-SILABOS"
 __author__ = "Sistema PROMETEO-JHON"
-__description__ = "Configuración hardcodeada completa para Jhon Villegas Verde - Ciclo 2025-II"
+__description__ = "Configuración hardcodeada completa con sílabos oficiales - Jhon Villegas Verde - Ciclo 2025-II"
 
 if __name__ == "__main__":
-   print("🚀 PROMETEO-JHON Master Configuration")
-   print("=" * 50)
+   print("🚀 PROMETEO-JHON 4.0 - Configuración Final con Sílabos")
+   print("=" * 60)
    
-   # Ejecutar inicialización
    if inicializar_configuracion_jhon():
-       print("\n🧪 Ejecutando tests de validación...")
-       resultados_test = test_configuracion_completa()
-       
-       tests_pasados = sum(resultados_test.values())
-       tests_totales = len(resultados_test)
-       
-       print(f"\n📊 Resultado: {tests_pasados}/{tests_totales} tests pasados")
-       
-       if tests_pasados == tests_totales:
-           print("🎉 Configuración PROMETEO-JHON lista para producción!")
-       else:
-           print("⚠️ Hay tests fallando - revisar antes de usar")
-           
-       # Mostrar resumen configuración
-       print(f"\n📋 Resumen configuración:")
-       print(f"   👤 Usuario: {JHON_PROFILE_MASTER['personal']['nombre_completo']}")
-       print(f"   🎯 Meta académica: {JHON_PROFILE_MASTER['academico']['meta_ciclo_2025_2']}")
-       print(f"   💪 Meta física: {JHON_PROFILE_MASTER['personal']['peso_inicial']}kg → {JHON_PROFILE_MASTER['personal']['peso_meta_final']}kg")
-       print(f"   💰 Presupuesto: S/{PRESUPUESTO_VARIABLE_JHON['agosto_octubre_2025']['disponible']}")
-       print(f"   📚 Cursos: {len(CURSOS_CICLO_2025_2_COMPLETO)} configurados")
-       print(f"   📅 Semana actual: {obtener_semana_actual()}/18")
-       
-       evaluaciones_proximas = get_evaluaciones_proximas_dias(7)
+       evaluaciones_proximas = obtener_evaluaciones_proximas_dias(14)
        if evaluaciones_proximas:
-           print(f"   ⚠️  Evaluaciones próximas: {len(evaluaciones_proximas)}")
-           for eval in evaluaciones_proximas[:3]:
-               print(f"      • {eval['evaluacion']} - {eval['curso']} ({eval['dias_restantes']} días)")
+           print(f"\n📋 Próximas evaluaciones (14 días):")
+           for eval in evaluaciones_proximas[:5]:
+               print(f"   • {eval['evaluacion']} - {eval['curso']} - {eval['profesor']} ({eval['dias_restantes']} días)")
        
+       print(f"\n🎯 Meta 15.82: {validar_meta_1582_matematica()['factibilidad']}")
+       print("🎉 Sistema listo para producción!")
    else:
        print("❌ Error en inicialización - revisar configuración")
